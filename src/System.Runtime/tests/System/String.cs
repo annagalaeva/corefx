@@ -1526,6 +1526,7 @@ public static unsafe class StringTests
     public static void TestTrim()
     {
         String s;
+        char[] charsToTrim = {'.', 'a', '1' };
 
         s = "  Foo  ".Trim();
         Assert.Equal("Foo", s);
@@ -1533,17 +1534,26 @@ public static unsafe class StringTests
         s = ". Foo .".Trim('.');
         Assert.Equal(" Foo ", s);
 
+        s = ".a1Foo.a1".Trim(charsToTrim);
+        Assert.Equal("Foo", s);
+
         s = "  Foo  ".TrimStart();
         Assert.Equal("Foo  ", s);
 
         s = ". Foo .".TrimStart('.');
         Assert.Equal(" Foo .", s);
 
+        s = ".a1Foo.a1".TrimStart(charsToTrim);
+        Assert.Equal("Foo.a1", s);
+
         s = "  Foo  ".TrimEnd();
         Assert.Equal("  Foo", s);
 
         s = ". Foo .".TrimEnd('.');
         Assert.Equal(". Foo ", s);
+
+        s = ".a1Foo.a1".TrimEnd(charsToTrim);
+        Assert.Equal(".a1Foo", s);
     }
 
     [Fact]
